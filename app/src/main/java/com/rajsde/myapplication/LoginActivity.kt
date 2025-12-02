@@ -22,10 +22,15 @@ class LoginActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         // If you have a "Sign Up" text on login screen to go to signup
         val tvGoToSignup = findViewById<TextView>(R.id.tvGoToSignup) // Make sure this ID matches
+        val tvForgot = findViewById<TextView>(R.id.tvForgotPassword)
 
         tvGoToSignup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
+        }
+
+        tvForgot.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
         btnLogin.setOnClickListener {

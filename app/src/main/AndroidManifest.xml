@@ -40,6 +40,9 @@
         <activity
             android:name=".HomeActivity"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity android:name=".ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
