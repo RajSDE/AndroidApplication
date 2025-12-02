@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
-        android:gravity="center">
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal">
 
         <ImageView
             android:layout_width="250dp"
