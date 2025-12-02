@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5B4DBC"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:padding="20dp"
+        android:background="#FFFFFF"
+        android:textSize="16sp"
+        android:drawableEnd="@android:drawable/ic_media_play"
+        android:drawableTint="#CCCCCC"/>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE"/>
+
+    <TextView
+        android:id="@+id/btnPrivacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Privacy &amp; Security"
+        android:padding="20dp"
+        android:background="#FFFFFF"
+        android:textSize="16sp"
+        android:drawableEnd="@android:drawable/ic_media_play"
+        android:drawableTint="#CCCCCC"/>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE"/>
+
+    <TextView
+        android:id="@+id/btnHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Help &amp; Support"
+        android:padding="20dp"
+        android:background="#FFFFFF"
+        android:textSize="16sp"
+        android:drawableEnd="@android:drawable/ic_media_play"
+        android:drawableTint="#CCCCCC"/>
+
+    <View android:layout_width="match_parent" android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/btnGoToDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:padding="20dp"
+        android:background="#FFFFFF"
+        android:textSize="16sp"
+        android:textColor="#D32F2F"
+        android:textStyle="bold"
+        android:drawableEnd="@android:drawable/ic_menu_delete"
+        android:drawableTint="#D32F2F"/>
+
+</LinearLayout>

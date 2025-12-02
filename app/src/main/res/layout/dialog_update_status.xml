@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_rounded"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Status"
+        android:textColor="#333333"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Current Status"
+        app:boxStrokeColor="#5B4DBC"
+        app:hintTextColor="#5B4DBC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDialogStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences"
+            android:textColor="#333333"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/btnDialogDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            android:textColor="#D32F2F"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/btnDialogCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:textColor="#888888"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnDialogUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="Update"
+            android:backgroundTint="#5B4DBC"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

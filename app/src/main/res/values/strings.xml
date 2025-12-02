@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PostBox</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="welcome_message_main">Welcome To PostBox,\nYour Ultimate Messaging App</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_using">Sign up using</string>
+    <string name="message_login_logo">Message Login Logo</string>
+    <string name="postbox">PostBox</string>
+    <string name="postbox_messenger">PostBox Messenger</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

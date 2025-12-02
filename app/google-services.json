@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1072831883440",
+    "project_id": "postbox-messenger",
+    "storage_bucket": "postbox-messenger.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072831883440:android:9781c1df252230c24a3375",
+        "android_client_info": {
+          "package_name": "com.rajsde.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgLnr64TDc0nvsbEF5WCpFpzd18ehdJ5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
