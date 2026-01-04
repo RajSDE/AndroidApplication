@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-// Data class for the Chat
+// 1. UPDATED Data Class (Added timestamp)
 data class ChatRoom(
     val id: String = "",
     val users: List<String> = emptyList(),
-    val lastMessage: String = ""
+    val lastMessage: String = "",
+    val lastUpdated: Timestamp? = null // NEW FIELD
 )
 
 class HomeChatAdapter(private val chatList: List<ChatRoom>) :
@@ -23,6 +27,7 @@ class HomeChatAdapter(private val chatList: List<ChatRoom>) :
         val tvName: TextView = itemView.findViewById(R.id.tvRowName)
         val tvMsg: TextView = itemView.findViewById(R.id.tvRowLastMessage)
         val tvInitials: TextView = itemView.findViewById(R.id.tvRowInitials)
+        val tvTime: TextView = itemView.findViewById(R.id.tvRowTime) // NEW VIEW
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
@@ -33,48 +38,48 @@ class HomeChatAdapter(private val chatList: List<ChatRoom>) :
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val chat = chatList[position]
         val myUid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
-        // 1. Find the other person
         val friendUid = chat.users.find { it != myUid } ?: return
 
-        // 2. Fetch Friend's Details
+        // 2. NEW: Format and Set Time
+        if (chat.lastUpdated != null) {
+            val date = chat.lastUpdated.toDate()
+            // Format: 10:30 AM
+            val sdf = SimpleDateFormat("h:mm a", Locale.getDefault())
+            holder.tvTime.text = sdf.format(date)
+        } else {
+            holder.tvTime.text = ""
+        }
+
+        // 3. Fetch Friend Details (Same as before)
         FirebaseFirestore.getInstance().collection("users").document(friendUid).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
                     val name = document.getString("name") ?: "Unknown"
                     holder.tvName.text = name
 
-                    // --- ENHANCED LOGIC WITH STYLING ---
                     val status = document.getString("status")
-
                     if (!status.isNullOrEmpty()) {
-                        // Priority 1: Show Status -> Add Quotes + Italic
                         holder.tvMsg.text = "\"$status\""
                         holder.tvMsg.setTypeface(null, android.graphics.Typeface.ITALIC)
                     } else {
-                        // Priority 2: Show Last Message -> Normal Text
                         holder.tvMsg.text = chat.lastMessage
                         holder.tvMsg.setTypeface(null, android.graphics.Typeface.NORMAL)
                     }
-                    // -----------------------------------
+
                     if (name.isNotEmpty()) {
                         val words = name.trim().split(" ")
                         var initials = ""
                         if (words.isNotEmpty()) {
-                            // First letter of first name
                             initials += words[0].first().uppercase()
-                            // First letter of last name (if it exists)
                             if (words.size > 1) {
                                 initials += words[1].first().uppercase()
                             }
                         }
                         holder.tvInitials.text = initials
                     }
-
                 }
             }
 
-        // 3. Handle Click
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ChatActivity::class.java)

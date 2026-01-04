@@ -35,6 +35,7 @@
         android:paddingStart="8dp"
         android:paddingTop="8dp"
         android:paddingEnd="8dp"
+        android:background="#E6E6E6"
         android:paddingBottom="5dp">
 
         <EditText
@@ -44,7 +45,6 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/bg_chat_input"
-            android:elevation="2dp"
             android:hint="Message"
             android:minHeight="48dp"
             android:paddingStart="20dp"
@@ -57,7 +57,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/bg_chat_input"
-            android:elevation="2dp"
             android:src="@android:drawable/ic_menu_send"
             app:tint="#5B4DBC" />
     </LinearLayout>

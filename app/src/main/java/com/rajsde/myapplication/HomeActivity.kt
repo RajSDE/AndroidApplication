@@ -2,10 +2,8 @@ package com.rajsde.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -72,22 +70,23 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun loadActiveChats() {
         val myUid = auth.currentUser?.uid ?: return
 
-        // Query: Find all chats where "users" array contains MY ID
         FirebaseFirestore.getInstance().collection("chats")
             .whereArrayContains("users", myUid)
+            // Optional: Order by time so newest is top
+            // .orderBy("lastUpdated", com.google.firebase.firestore.Query.Direction.DESCENDING)
             .addSnapshotListener { value, error ->
                 if (error != null) return@addSnapshotListener
 
                 if (value != null) {
                     chatList.clear()
                     for (doc in value.documents) {
-                        // Create ChatRoom object manually from document
                         val users = doc.get("users") as? List<String> ?: emptyList()
                         val lastMsg = doc.getString("lastMessage") ?: ""
+                        // NEW: Get Timestamp
+                        val timestamp = doc.getTimestamp("lastUpdated")
 
-                        // Only add if data is valid
                         if (users.isNotEmpty()) {
-                            chatList.add(ChatRoom(doc.id, users, lastMsg))
+                            chatList.add(ChatRoom(doc.id, users, lastMsg, timestamp))
                         }
                     }
                     chatAdapter.notifyDataSetChanged()

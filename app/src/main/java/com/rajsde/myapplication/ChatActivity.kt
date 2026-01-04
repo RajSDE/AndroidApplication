@@ -16,6 +16,8 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ChatActivity : AppCompatActivity() {
 
@@ -138,7 +140,8 @@ class MessageAdapter(private val messageList: ArrayList<Message>, private val my
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.tvMessage)
-        val container: LinearLayout = itemView as LinearLayout
+        val time: TextView = itemView.findViewById(R.id.tvTimestamp) // NEW
+        val container: LinearLayout = itemView.findViewById(R.id.layoutMessageContainer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -150,16 +153,32 @@ class MessageAdapter(private val messageList: ArrayList<Message>, private val my
         val message = messageList[position]
         holder.text.text = message.text
 
-        if (message.senderId == myUid) {
-            // MY MESSAGE (Right Side, Purple Bubble)
-            holder.container.gravity = Gravity.END
-            holder.text.setBackgroundResource(R.drawable.bg_bubble_sent) // Use new drawable
-            holder.text.setTextColor(0xFFFFFFFF.toInt()) // White text
+        // --- NEW: Format and Set Timestamp ---
+        if (message.timestamp != null) {
+            val date = message.timestamp.toDate()
+            val sdf = SimpleDateFormat("h:mm a", Locale.getDefault()) // "10:30 AM"
+            holder.time.text = sdf.format(date)
         } else {
-            // FRIEND'S MESSAGE (Left Side, White Bubble)
+            holder.time.text = "Now" // While uploading
+        }
+
+        // --- Alignment Logic ---
+        if (message.senderId == myUid) {
+            // MY MESSAGE -> Right Side
+            holder.container.gravity = Gravity.END
+            holder.text.setBackgroundResource(R.drawable.bg_bubble_sent)
+            holder.text.setTextColor(0xFFFFFFFF.toInt())
+
+            // Align Time to End as well
+            holder.time.gravity = Gravity.END
+        } else {
+            // FRIEND MESSAGE -> Left Side
             holder.container.gravity = Gravity.START
-            holder.text.setBackgroundResource(R.drawable.bg_bubble_received) // Use new drawable
-            holder.text.setTextColor(0xFF000000.toInt()) // Black text
+            holder.text.setBackgroundResource(R.drawable.bg_bubble_received)
+            holder.text.setTextColor(0xFF000000.toInt())
+
+            // Align Time to Start
+            holder.time.gravity = Gravity.START
         }
     }
 
